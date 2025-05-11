@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
 import WaterfallDemo from "@/views/WaterfallDemo.vue";
+let base = "/metaApp";
 
 const routes = [
   {
@@ -9,14 +10,14 @@ const routes = [
     component: Home,
   },
   {
-    path: "/waterfall",
+    path: `${base}/waterfall`,
     name: "Waterfall",
     component: WaterfallDemo,
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes,
 });
 
