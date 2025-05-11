@@ -16,7 +16,6 @@
       <span v-else>{{ pullText }}</span>
     </div>
     <div class="pull-refresh-container">
-      <!-- 滚动容器 -->
       <div
         ref="scrollWrapper"
         class="scroll-wrapper"
