@@ -5,7 +5,7 @@ let base = "/metaApp1";
 
 const routes = [
   {
-    path: "/",
+    path: base,
     name: "Home",
     component: Home,
   },
