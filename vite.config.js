@@ -16,7 +16,7 @@ export default defineConfig({
       watchFiles: true, // 监视文件变化
     }),
   ],
-  base: process.env.NODE_ENV === "production" ? "/metaApp/" : "/",
+  base: "./",
   build: {
     outDir: "docs", // 打包后的文件输出到docs目录
   },
