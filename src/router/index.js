@@ -7,7 +7,7 @@ const routes = [
   {
     path: base,
     name: "Home",
-    component: Home,
+    component: WaterfallDemo,
   },
   {
     path: `${base}/waterfall`,
