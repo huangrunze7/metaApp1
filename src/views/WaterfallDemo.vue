@@ -14,11 +14,14 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import WaterfallFlow from "@/components/WaterfallFlow.vue";
+import { useRoute } from "vue-router";
 
 const waterfallList = ref([]);
 const page = ref(1);
 const loading = ref(false);
 const noMore = ref(false);
+const route = useRoute();
+const type = route.query.type;
 // 加载数据函数
 const loadData = async (isRefresh = false) => {
   if (loading.value) return;
@@ -29,6 +32,7 @@ const loadData = async (isRefresh = false) => {
       params: {
         page: page.value,
         pageSize: 10,
+        type: type,
         timestamp: Date.now(), // 添加时间戳防止缓存
       },
     });

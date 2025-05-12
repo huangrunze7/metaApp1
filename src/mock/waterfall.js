@@ -13,15 +13,32 @@ Mock.mock(RegExp("/api/waterfall/list.*"), "get", function (options) {
   const query = parseQuery(options.url);
   const page = Number(query.page) || 1;
   const pageSize = Number(query.pageSize) || 10;
-
+  const type = Number(query.type) || 1;
   // 视频资源库（可替换为真实URL）
   const videoSources = [
-    "https://cn-gdjm-cm-01-02.bilivideo.com/upgcxcode/56/54/25713315456/25713315456-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1746982669&gen=playurlv2&os=bcache&oi=1879127506&trid=000015cb2ee523124a868e9bb78ac10de6a1h&mid=0&platform=html5&og=hw&upsig=d71e78389c6e1ffa856fd30a02821560&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=88502&bvc=vod&nettype=0&f=h_0_0&bw=65595&logo=80000000",
-    "https://cn-gdjm-cm-01-02.bilivideo.com/upgcxcode/56/54/25713315456/25713315456-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1746982669&gen=playurlv2&os=bcache&oi=1879127506&trid=000015cb2ee523124a868e9bb78ac10de6a1h&mid=0&platform=html5&og=hw&upsig=d71e78389c6e1ffa856fd30a02821560&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=88502&bvc=vod&nettype=0&f=h_0_0&bw=65595&logo=80000000",
-    "https://cn-gdjm-cm-01-02.bilivideo.com/upgcxcode/56/54/25713315456/25713315456-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1746982669&gen=playurlv2&os=bcache&oi=1879127506&trid=000015cb2ee523124a868e9bb78ac10de6a1h&mid=0&platform=html5&og=hw&upsig=d71e78389c6e1ffa856fd30a02821560&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=88502&bvc=vod&nettype=0&f=h_0_0&bw=65595&logo=80000000",
-    "https://cn-gdjm-cm-01-02.bilivideo.com/upgcxcode/56/54/25713315456/25713315456-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1746982669&gen=playurlv2&os=bcache&oi=1879127506&trid=000015cb2ee523124a868e9bb78ac10de6a1h&mid=0&platform=html5&og=hw&upsig=d71e78389c6e1ffa856fd30a02821560&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=88502&bvc=vod&nettype=0&f=h_0_0&bw=65595&logo=80000000",
+    "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/30/60/29905126030/29905126030-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1747014370&gen=playurlv2&os=akam&oi=1760166133&trid=b03bd4f2df7e4e4ebc4825a35c1d4463h&mid=0&platform=html5&og=hw&upsig=88b4b50bd9a4b5496966948bb851df3f&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&hdnts=exp=1747014370~hmac=171933529c1db703934e90202db6c046d5803ce5f99dad9920480e384fc038c8&bvc=vod&nettype=0&f=h_0_0&bw=63332&logo=80000000",
+    "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/30/60/29905126030/29905126030-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1747014370&gen=playurlv2&os=akam&oi=1760166133&trid=b03bd4f2df7e4e4ebc4825a35c1d4463h&mid=0&platform=html5&og=hw&upsig=88b4b50bd9a4b5496966948bb851df3f&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&hdnts=exp=1747014370~hmac=171933529c1db703934e90202db6c046d5803ce5f99dad9920480e384fc038c8&bvc=vod&nettype=0&f=h_0_0&bw=63332&logo=80000000",
+    "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/30/60/29905126030/29905126030-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1747014370&gen=playurlv2&os=akam&oi=1760166133&trid=b03bd4f2df7e4e4ebc4825a35c1d4463h&mid=0&platform=html5&og=hw&upsig=88b4b50bd9a4b5496966948bb851df3f&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&hdnts=exp=1747014370~hmac=171933529c1db703934e90202db6c046d5803ce5f99dad9920480e384fc038c8&bvc=vod&nettype=0&f=h_0_0&bw=63332&logo=80000000",
+    "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/30/60/29905126030/29905126030-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1747014370&gen=playurlv2&os=akam&oi=1760166133&trid=b03bd4f2df7e4e4ebc4825a35c1d4463h&mid=0&platform=html5&og=hw&upsig=88b4b50bd9a4b5496966948bb851df3f&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&hdnts=exp=1747014370~hmac=171933529c1db703934e90202db6c046d5803ce5f99dad9920480e384fc038c8&bvc=vod&nettype=0&f=h_0_0&bw=63332&logo=80000000",
   ];
-
+  const videoSources1 = [
+    "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/35/53/28494335335/28494335335-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1747015143&gen=playurlv2&os=akam&oi=1760166133&trid=4eabb47d400640a7a49ed392c7dd7290h&mid=0&platform=html5&og=cos&upsig=f5c9f6ac0eac3c37ae772d31d4c56077&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&hdnts=exp=1747015143~hmac=debc453b9fa42364a7e46388856ed0c6c393eec0a87dd16a172d44e328333333&bvc=vod&nettype=0&f=h_0_0&bw=38308&logo=80000000",
+    "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/35/53/28494335335/28494335335-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1747015143&gen=playurlv2&os=akam&oi=1760166133&trid=4eabb47d400640a7a49ed392c7dd7290h&mid=0&platform=html5&og=cos&upsig=f5c9f6ac0eac3c37ae772d31d4c56077&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&hdnts=exp=1747015143~hmac=debc453b9fa42364a7e46388856ed0c6c393eec0a87dd16a172d44e328333333&bvc=vod&nettype=0&f=h_0_0&bw=38308&logo=80000000",
+    "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/35/53/28494335335/28494335335-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1747015143&gen=playurlv2&os=akam&oi=1760166133&trid=4eabb47d400640a7a49ed392c7dd7290h&mid=0&platform=html5&og=cos&upsig=f5c9f6ac0eac3c37ae772d31d4c56077&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&hdnts=exp=1747015143~hmac=debc453b9fa42364a7e46388856ed0c6c393eec0a87dd16a172d44e328333333&bvc=vod&nettype=0&f=h_0_0&bw=38308&logo=80000000",
+    "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/35/53/28494335335/28494335335-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1747015143&gen=playurlv2&os=akam&oi=1760166133&trid=4eabb47d400640a7a49ed392c7dd7290h&mid=0&platform=html5&og=cos&upsig=f5c9f6ac0eac3c37ae772d31d4c56077&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&hdnts=exp=1747015143~hmac=debc453b9fa42364a7e46388856ed0c6c393eec0a87dd16a172d44e328333333&bvc=vod&nettype=0&f=h_0_0&bw=38308&logo=80000000",
+  ];
+  const imgSources = [
+    "https://img1.baidu.com/it/u=3573657214,1329192546&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500",
+    "https://img2.baidu.com/it/u=1574821713,3001062660&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500",
+    "https://img0.baidu.com/it/u=2957218001,1135064860&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500",
+    "https://img2.baidu.com/it/u=1017585846,596196740&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=500",
+  ];
+  const imgSources1 = [
+    "https://img1.baidu.com/it/u=132361974,4193066749&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+    "https://img0.baidu.com/it/u=3427417399,2857940028&fm=253&fmt=auto&app=120&f=JPEG?w=1266&h=800",
+    "https://img0.baidu.com/it/u=2610008207,1087569662&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=800",
+    "https://img1.baidu.com/it/u=1964916270,1783148707&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=800",
+  ];
   // 图片资源库
   const imageCategories = ["nature", "people", "tech", "animals", "food"];
 
@@ -40,20 +57,30 @@ Mock.mock(RegExp("/api/waterfall/list.*"), "get", function (options) {
         media: function () {
           if (this.type === "video") {
             return {
-              cover: Mock.Random.image(
-                "300x200",
-                Mock.Random.color(),
-                "Video Cover"
-              ),
-              url: videoSources[this.id % videoSources.length],
+              // cover: Mock.Random.image(
+              //   "300x200",
+              //   Mock.Random.color(),
+              //   "Video Cover"
+              // ),
+              cover:
+                type == 1
+                  ? imgSources[this.id % imgSources.length]
+                  : imgSources1[this.id % imgSources1.length],
+              url:
+                type == 1
+                  ? videoSources[this.id % videoSources.length]
+                  : videoSources1[this.id % videoSources1.length],
               duration: Mock.Random.integer(5, 180), // 视频时长(秒)
             };
           } else {
-            return Mock.Random.image(
-              "300x200",
-              Mock.Random.color(),
-              imageCategories[this.id % imageCategories.length]
-            );
+            // return Mock.Random.image(
+            //   "300x200",
+            //   Mock.Random.color(),
+            //   imageCategories[this.id % imageCategories.length]
+            // );
+            return type == 1
+              ? imgSources[this.id % imgSources.length]
+              : imgSources1[this.id % imgSources1.length];
           }
         },
         avatar: Mock.Random.image("50x50", Mock.Random.color(), "Avatar"),
